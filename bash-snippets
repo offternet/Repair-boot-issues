@@ -1,0 +1,45 @@
+=================
+Purpose: Solve issue of unknown absolute path that is needed in name.desktop entry file. 
+
+ The variables $USER and/or $HOME can not be used inside a name.desktop entry file
+
+Use $HOME variable in name.desktop file to execute a file:
+
+Exec=bash -c '$HOME/yadbash/godistro/dock/about-info/scripts/display-about-info-message.sh'
+
+===================
+
+Insert the absolute /home/user/ path for logged in user (example: robert) in to a name.desktop on a Linux system 
+
+  the code below only needs to be run once from a main script - it copies the correct path for user logged in, 
+  
+  Note: This code adds the Icon= line to the name.desktop file so, existing Icon= line will need to be removed prior to running the below code:
+  
+bash -c 'echo "Icon=$(echo ~)/yadbash/godistro/images/joomla-icon.png;" >> /home/$USER/yadbash/godistro/dock/display/about-godistro.desktop'
+
+(Before code above)--
+
+[Desktop Entry]
+Version=1.0
+Name=About YadLAMP Help
+GenericName=About GoDistro
+Comment=About GoDistro
+Exec=bash -c '$HOME/yadbash/godistro/dock/about-info/scripts/display-about-info-message.sh'
+NoDisplay=true
+Terminal=false
+Type=Application
+
+
+
+(After code above)--
+
+[Desktop Entry]
+Version=1.0
+Name=About YadLAMP Help
+GenericName=About GoDistro
+Comment=About GoDistro
+Exec=bash -c '$HOME/yadbash/godistro/dock/about-info/scripts/display-about-info-message.sh'
+NoDisplay=true
+Terminal=false
+Type=Application
+Icon=/home/robert/yadbash/godistro/images/joomla-icon.png

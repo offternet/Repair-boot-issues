@@ -1,5 +1,6 @@
-Following will help with fixing a No Boot to filesystem:  
-Issue: Grub2 (Dump to Grub prompt)
+Following will help with fixing a No Boot situation to a filesystem that is using Grub Bootloader.
+
+Issue: Grub2 (Dumps to Grub prompt or you never see a Grub Menu on failed boot)
 Issue: Grub2 (Will not set correct 3rd entry in Menuentry)
 Issue: "Gave up waiting for Resume"
 Issue: initrams (dump to prompt)
@@ -68,7 +69,52 @@ This step assumes you fix Grub boot issue (Grub Dumps to Prompt) above.
           
   7. Reboot
   8. Boot to any partition you want. (Should be fixed now).
-  3. Press 
+  
+  ================================================================
+  
+  **Issue: "Gave up waiting for Resume"
+  
+       Note: This issue is usually wrong uuid= number used in root partition and/or swap partiton in the following file(s):
+       
+              Debian systems: /etc/fstab and /etc/initramfs-tools/conf.d/resume files
+              
+              Ubuntu 16.04+ /etc/fstab file only (Ubuntu does not have a resume file at /etc/initramfs-tools/conf.d)
+             
+             
+  1. Boot to the patition that has Resume error.
+  2. Open terminal and run this sudo command:
+  
+        sudo blkid
+        
+     (Record uuid= number "without double quotes" of the partition you are booted to "The patition with resume error")
+     
+  3. In termainal you will need to correct the uud= number for partition(s)
+  
+       sudo nano /etc/fstab
+       
+     (Use cursor keys to end of uuid= Number(s) that are not correct paritions root and/or swap.
+     replace it by deleting with backspace key, manually typ in correct uuid= number
+     To Save chagnes --> Press & Hold "CTRL KEY" + "x" key --> Press "y" key --> Press "Enter Key")
+     
+     (This next step is not required in Ubuntu System)
+     
+       sudo nano /etc/initramfs-toos/conf.d/resume
+       
+     (make sure file format is like this with correct uuid= number)
+     
+     RESUME=UUID=CORRECT NUMBER
+     
+     (To Save chagnes --> Press & Hold "CTRL KEY" + "x" key --> Press "y" key --> Press "Enter Key")
+     
+  4. Reboot
+  
+  5. Boot to same partiton you just fixed and verify "Resume error is gone".
+  
+  ============================================================
+  
+  
+   
+     
 
 
 

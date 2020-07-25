@@ -106,13 +106,22 @@ This step assumes you fix Grub boot issue (Grub Dumps to Prompt) above.
      
      (To Save chagnes --> Press & Hold "CTRL KEY" + "x" key --> Press "y" key --> Press "Enter Key")
      
+  4. Run these sudo commands:
+  
+       sudo update-initramfs -u
+       
+       sudo update-grub
+     
   4. Reboot
   
   5. Boot to same partiton you just fixed and verify "Resume error is gone".
   
   ============================================================
   
-  
+Issue: initrams (dump to prompt)  
+
+       USE the above fix for Issue: Grub2 (Dumps to Grub prompt or you never see a Grub Menu on failed boot)
+       to fix initrams (dump to prompt)
    
      
 

@@ -1,0 +1,76 @@
+Following will help with fixing a No Boot to filesystem:  
+Issue: Grub2 (Dump to Grub prompt)
+Issue: Grub2 (Will not set correct 3rd entry in Menuentry)
+Issue: "Gave up waiting for Resume"
+Issue: initrams (dump to prompt)
+
+Note:  It is easier to fix these issues if you have a USB Stick with Debian GUI or Ubuntu LTS was installed; not Live System. 
+       You can not update-grub from a Live System. 
+       If you use a Live DVD or USB Stick you will need to install that live to anoter hard drive partition or USB Stick; and
+       Then do the below fixes.
+       
+       As used below:  "x" is the number of your device "Drive" assigned to our hard drive or USB stick that you want to fix.
+       As used below:  "X" is the letter of the partition you want to fix.
+       
+Needed:  USB Stick that has Debian or Ubuntu Distro installed (not Live DVD or USB)
+
+=================================================================
+
+**issue: Grub2 (Dump to Grub prompt)
+
+  1. Boot Debian or Ubuntu USB Stick
+  
+  2. Open Terminal and run sudo commands:
+  
+        sudo grub-install /dev/sdx
+        
+        sudo update-grub
+        
+        sudo blkid
+        
+    (Record uuid= number "without double quotes" for first partition of drive you are tryng to fix (for example /dev/sda1)
+        /dev/sda1: UUID="a8ee372d-07d5-4912-a103-503c5ecc063c"
+        
+  3. Reboot to USB Stick
+  
+  4. Highlight the first partition on drive you are trying to fix (for example) /dev/sda1 
+        press "e" key
+        Verify all entries for uuid= are same, If not same, verity your correct uuid= for first partition
+        Use arrow keys past uuid= number and use backspace to delete uuid= number
+        Manually type in corect uuid= number
+        Press F10 to boot with all correct uuid= number for first partition of drive you are trying to fix.
+        
+  5. Now that you have booted successfully to first partition of drive you are wanting to fix, run this sudo command:
+  
+          sudo update-grub
+          
+  6. Reboot to drive that you are trying to fix
+        Highlight first partition of drive
+        Press "e" key. Verify all uuid= number are same. If not, got to step: Issue: Grub (will not set correct 3rd entry in Menuentry)
+        
+        
+ ===============================================================
+ 
+**Issue: Grub2 (Will not set correct 3rd entry in Menuentry)
+
+This step assumes you fix Grub boot issue (Grub Dumps to Prompt) above.
+
+  1. Boot to drive effected.
+  2. ightlight first partition and press "e" key
+  3. Type the correct uuid= number in 3rd location (or all locations if necessary)
+  4. Press "F10" key to boot in to first partition of effected drive.
+  5. Connect to internet
+  6. Open Terminal and run the following sudo commands:
+  
+          sudo apt remove grub grub2 grub-common
+          
+          sudo apt install grub2 grub-common
+          
+  7. Reboot
+  8. Boot to any partition you want. (Should be fixed now).
+  3. Press 
+
+
+
+
+

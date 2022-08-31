@@ -1,6 +1,20 @@
 Following will help with fixing a No Boot situation to a filesystem that is using Grub Bootloader.
 
+If you are reading this hopefully its when your GNU/Linux system is still botting with Grub/Grub2. If so, make a bootable USB thumb drive
+that can be used in the future to help in recovering a grub fails to boot situation.
+
 Issue: Grub2 (Dumps to Grub prompt or you never see a Grub Menu on failed boot)
+       - Boot from a non-live linux usb stick, hard drive or recovery cd.
+       - open terminal and remove all grub from system. When it asks if you want to remove all settings, answer yes.
+       - Run Command $-> sudo apt-get purge grub-common
+          (after grub is removed, do NOT!!!!!! reboot or shutdown, REINSTALL GRUB !!!! /dev/sda "or what your boot hard drive is)
+          - Run Command $-> sudo grub-install /dev/sxx
+            (if you have a multi-boot linux system and you see MULTIBLE Kernels / linux names - DONE !)
+            (if you fail to see all boot partitions after grub installs, REBOOT and system should boot without Grub menu.)
+            - Run Command once again $-> sudo update-grub 
+              (You should see all kernel / linux names now - Done)
+              (If still error, see below)
+
 Issue: Grub2 (Will not set correct 3rd entry in Menuentry)
 Issue: "Gave up waiting for Resume"
 Issue: initrams (dump to prompt)
